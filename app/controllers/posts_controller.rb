@@ -11,4 +11,13 @@ class PostsController < ApplicationController
 
   def edit
   end
+  
+  def edit_spam
+    posts.each do |post|
+      if post_id % 5 == 0
+        post.update_attributes(:title => "SPAM")
+      end
+    end
+  end
+
 end
