@@ -1,6 +1,12 @@
 class PostsController < ApplicationController
   def index
     @posts = Post.all
+    
+     posts.each do |post|
+      if post_id % 5 == 0
+        post.title = "SPAM"
+      end
+    end
   end
 
   def show
@@ -12,12 +18,4 @@ class PostsController < ApplicationController
   def edit
   end
   
-  def edit_spam
-    posts.each do |post|
-      if post_id % 5 == 0
-        post.update_attributes(:title => "SPAM")
-      end
-    end
-  end
-
 end
