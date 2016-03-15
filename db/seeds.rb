@@ -22,6 +22,8 @@ end
 post = Post.find_or_create_by( title: "My unique post", body: "My unique body")
 comment = Comment.find_or_create_by(post: post, body: "My unique body")
 
+posts =  Post.all
+
 #create Advertisements
 50.times do
     Advertisement.create!(
@@ -30,7 +32,7 @@ comment = Comment.find_or_create_by(post: post, body: "My unique body")
     )
 end
 
-posts =  Post.all
+advertisements = Advertisement.all
 
 
 puts "Seed finished"

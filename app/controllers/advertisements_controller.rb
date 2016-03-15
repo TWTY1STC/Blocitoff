@@ -1,7 +1,6 @@
 class AdvertisementsController < ApplicationController
-  
   def index
-    @advertisements = Advertisements.all
+    @advertisements = Advertisement.all
   end
 
   def show
@@ -14,8 +13,8 @@ class AdvertisementsController < ApplicationController
 
   def create
     @advertisement = Advertisement.new
-    @advertisement.title = params[:post][:title]
-    @advertisement.body = params [:post][:body]
+    @advertisement.title = params[:advertisement][:title]
+    @advertisement.body = params[:advertisement][:body]
     
     if @advertisement.save
       flash[:notice] = "Advertisement saved."
