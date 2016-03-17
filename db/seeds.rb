@@ -8,6 +8,7 @@ require 'random_data'
     )
 end
 topics = Topic.all
+
 #create Posts
 50.times do
     Post.create!(
@@ -27,6 +28,17 @@ posts =  Post.all
     )
 end
 
+#create SponsoredPosts
+50.times do
+    SponsoredPost.create!(
+        topic: topics.sample,
+        title: RandomData.random_sentence, 
+        body: RandomData.random_paragraph
+    )
+end
+
+sponsored_posts = SponsoredPost.all
+
 post = Post.find_or_create_by( title: "My unique post", body: "My unique body")
 comment = Comment.find_or_create_by(post: post, body: "My unique body")
 
@@ -34,4 +46,5 @@ puts "Seed finished"
 puts "#{Topic.count} topics created"
 puts "#{Post.count} posts created"
 puts "#{Comment.count} comments created"
+puts "#{SponsoredPost.count} sponsored posts created"
     
