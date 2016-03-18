@@ -39,4 +39,15 @@ RSpec.describe User, type: :model do
           
       end
   end
+  
+  describe "normalize name before save" do
+    let(:user_with_funky_name) { User.new(name: "jeffERY aUSTIN", email: "jeff@bloccit.com")}
+    
+    
+    it "should capitalize first letter of each name only" do
+      user_with_funky_name.save
+      expect(user_with_funky_name.name).to eq ("Jeffery Austin")
+      
+    end
+  end
 end

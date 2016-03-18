@@ -1,11 +1,12 @@
 class User < ActiveRecord::Base
     before_save { self.email = email.downcase }
-      before_save {
-        name_array = name.split
-        name_array.each do |name|
-            name.capitalize!
+    before_save {
+        array = []
+        self.name.to_s.split.each do |name|  #turn self.name into a string in order to split it, split results in an array
+           array << name.capitalize
+           self.name = array.join(" ") 
         end
-        name = name_array.join(" ")
+      
     }
     
     validates :name, length: {minimum: 1, maximum: 100 }, presence: true
