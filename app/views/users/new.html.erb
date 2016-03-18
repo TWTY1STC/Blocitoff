@@ -31,7 +31,14 @@
         <% end %> 
         <div class="form-group">
             <%= f.submit "Sign up", class: 'btn btn-success' %>
+                                -Logic: User presses sign up, action should render or redirect to confirmation page... In controller? 
         </div>
       <% end %>
+    </div>
+    
+    <div class="col-md-8"">
+        <%= form_for(@user, :url => {:action => :confirm} do |f|%>
+                                   -??????
+        <% end %>
     </div>
 </div>
