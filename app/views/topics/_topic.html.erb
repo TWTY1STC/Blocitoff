@@ -1,0 +1,11 @@
+<div class="media">
+    <div class="media-body">
+       <p> <%= link_to topic.name, @topic, method: :show %>
+        <small>
+            <% if user_is_authorized_for_topics? %>
+                <%= link_to "Delete", @topic, method: :delete %>
+            <% end %>
+        </small>
+       </p>
+    </div>
+</div>
