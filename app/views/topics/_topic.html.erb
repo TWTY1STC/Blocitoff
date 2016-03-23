@@ -1,11 +1,14 @@
 <div class="media">
     <div class="media-body">
-       <p> <%= link_to topic.name, @topic, method: :show %>
+       <h4><%= link_to topic.name, topics_path, method: :show %></h4>
+        <p><small>
+          <%= topic.description %>
+        </small>
         <small>
             <% if user_is_authorized_for_topics? %>
-                <%= link_to "Delete", @topic, method: :delete %>
+                <%= link_to "Delete", @topic, method: :delete, class: 'xs-btn btn-danger', data: {confirm: "Are you sure you want to delete this topic?"} %>
             <% end %>
         </small>
-       </p>
+      </p>
     </div>
 </div>
