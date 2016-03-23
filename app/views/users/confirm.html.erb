@@ -1,0 +1,17 @@
+<h1> Sign Up Confirmation </h1>
+
+<div class="row">
+    <div class="col-md-8">
+        <h3>Please confirm. Are these values correct?</h3>
+        <div>
+            <h4><p>Email: <%= @user.email %></h4>
+            <h4><p>Name: <%=@user.name %></h4>
+        </div>
+        <div class="form-group">
+            <%= button_to "Yes", {controller: "users", action: "create", params: params}, class: 'btn btn-success' %>
+            <%= link_to "No", new_user_path, class: 'btn btn-secondary' %>
+            
+        </div>
+    </div>
+</div>
+

@@ -26,16 +26,5 @@ class UsersController < ApplicationController
     @user.email = params[:user][:email]
     @user.password = params[:user][:password]
     @user.password_confirmation = params[:user][:password_confirmation]
-    
-    if @user.yes
-      redirect_to controller: "users", action: "create"
-    else
-      flash.now[:alert] = "There was an error creating your account. Please try again"
-      render :new
-
-    end
-      
   end
-  
-  
 end
