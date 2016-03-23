@@ -15,7 +15,10 @@
         <%= render partial: "labels/list", locals: { labels: @topic.labels} %>
         <br />
         <%= @topic.description %>
-        </p>
+        <div>
+          <%= render @topic.comments %>
+        </div>
+      </p>
         <% @topic.posts.each do |post| %>
           <div class="media">
             <div class="media-body">
@@ -35,5 +38,10 @@
           <%= link_to "New Post", new_topic_post_path(@topic), class: 'btn btn-success' %>
         </div>
       <% end %>
+      <div><h4>Add a topic comment</h4>
+        <% if current_user%>
+            <%= render 'comments/form', locals: {instance: @topic, comment: Comment.new} %>
+        <% end %>
+      </div>
     </div>
 </div>

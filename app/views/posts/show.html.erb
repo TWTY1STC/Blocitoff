@@ -18,8 +18,9 @@
             <h3>Comments</h3>
             <%= render @post.comments %>
         </div>
+        <h4>Add a post comment</h4>
         <% if current_user%>
-            <%= render 'comments/form', comment: Comment.new, post: @post %>
+            <%= render 'comments/form', instance: @post, comment: Comment.new %>
         <% end %>
     </div>
     <% if user_is_authorized_for_post?(@post)%>
