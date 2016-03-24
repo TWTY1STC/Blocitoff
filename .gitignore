@@ -16,3 +16,6 @@
 !/log/.keep
 /tmp
 /spring-1000/*
+
+# Ignore application configuration
+/config/application.yml
