@@ -20,42 +20,31 @@
 </div>
 
 <% if user_activity_empty? %>
-    <p><%= "#{user.name} has not submitted any posts or comments yet." %></p>
-
-<% elsif user_posts_empty? %>
-    <%= "#{user.name} has not submitted any posts yet." %>
-    <h2>Comments</h2>
-    <%= render @user.comments %>
-
-<% elsif user_comments_empty? %>
-    <%= "#{user.name} has not submitted any comments yet." %>
-    <h2>Posts</h2>
-    <%= render @user.posts %>
-
+    <p><%= "#{@user.name} has not submitted any posts or comments yet." %></p>
 <% else %>
-    <h2>Posts</h2>
-    <%= render @user.posts %>
-    
-    <h2>Comments</h2>
-    <%= render @user.comments %>
+ <h2>Posts</h2>
+  <% if user_posts_empty? %>
+      <%= "#{@user.name} has not submitted any posts yet." %>
+  <% else %>
+      <%= render @user.posts %>
+  <% end %>
+ 
+ <h2>Comments</h2>
+  <% if user_comments_empty? %>
+      <%= "#{@user.name} has not submitted any comments yet." %>
+  <% else %>
+      <%= render @user.comments %>
+  <% end %>
 <% end %>
 
 <div>
 <h2> Favorites</h2>
-    <% @user.favorites do |favorite| %>
-        <ul>
-        <% avatar_url = @favorite.post.user.avatar_url(24) %>
-            <% if avatar_url %>
-                <div class="media-left">
-                    <%= image_tag avatar_url, class: 'media-object' %>
-                </div>
-            <% end %>
-        <li> <%= @favorite.post.title %> </li>
-            <small>
-                <%= pluralize(@post.points.count, 'vote') %>,
-                <%= pluralize(@post.comments.count, 'comment') %>
-            </small>   
-        </ul>
-    <% end %>
-
+   
+  <% favorite_posts = @user.favorites.map { |fav| fav.post }%>
+  
+  <% for user in favorite_posts %>
+      <%= image_tag avatar_url(user) %>
+      <%= render favorite_posts.user %>
+  <% end %> 
+     
 </div>
