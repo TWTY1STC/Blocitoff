@@ -1,0 +1,8 @@
+"<%= @post.title%>" is added to your favorites. You'll receive updates when others comment on your post. 
+<%= "=" * (@post.title.length + 12 %>
+
+By: <%= @post.user.name %>
+
+<% @post.body %>
+
+Visit online at: <%= topic_post_url(@post.topic) %>

@@ -70,5 +70,23 @@ RSpec.describe Post, type: :model do
       expect(post.rank).to eq (old_rank + 1)
     end
   end
+  
+  describe "#send_new_post_emails" do
+    it "create_favorite when a post is created" do
+      post = topic.posts.new(title: RandomData.random_sentence, body: RandomData.random_paragraph, user: user)
+      expect(post).to receive(:send_new_post_emails)
+      post.save
+    end
+    
+    it "first favorite for post is by user" do
+      expect(post.favorites.first.user).to eq(post.user)
+    end
+    
+    it "sends new_post email to post user" do
+      favorite = user.favorites.create(post: post)
+      expect(FavoriteMailer).to receive(:new_post).with(user, post, @favorite).and_return(double(deliver_now: true))
+    end
+  end
  end
+ 
 end
