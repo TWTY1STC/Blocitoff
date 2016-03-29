@@ -3,33 +3,36 @@ class CommentsController < ApplicationController
     before_action :require_sign_in
     before_action :authorize_user, only: [:destroy]
     
-    #how to update this to evaluate only which instance we are referring to (topic or post)
-    # instance = @post || @topic , then sub all @--s with instance, except the first line where need Class.find
     
     def create
-      @post = Post.find(params[:post_id]) || @topic = Topic.find(params[:topic_id])
-      comment = @post.comments.new(comment_params) || comment = @topic.comments.new(comment_params)
+      @post ? Post.find(params[:post_id]) : @topic = Topic.find(params[:topic_id])
+      comment = @post ? @post.comments.new(comment_params) : @topic.comments.new(comment_params)
       comment.user = current_user
       
       if comment.save
         flash[:notice] = "Comment saved successfully."
-        redirect_to [@post.topic, @post] || [@topic.topics, @topic]
+        redirect_path = @post ? topic_post_path(@post.topic, @post) : topic_path(@topic)
+        redirect_to redirect_path
       else
         flash[:alert] = "Comment failed to save."
-        redirect_to [@post.topic, @post] || [@topic.topics, @topic]
+        redirect_path = @post ? topic_post_path(@post.topic, @post) : topic_path(@topic)
+        redirect_to redirect_path
       end
     end
     
     def destroy
-      @post = Post.find(params[:post_id]) || @topic = Topic.find(params[:topic_id])
-      comment = @post.comments.find(params[:id]) || comment = @topic.comments.find(params[:id])
+      @post ? Post.find(params[:post_id]) : @topic = Topic.find(params[:topic_id])
+      comment = @post ? @post.comments.new(comment_params) : @topic.comments.new(comment_params)
       
       if comment.destroy
         flash[:notice] = "Comment was deleted."
-        redirect_to [@post.topic, @post] || [@topic.topics, @topic]
+        redirect_path = @post ? topic_post_path(@post.topic, @post) : topic_path(@topic)
+        redirect_to redirect_path      
       else
+        
         flash[:alert] = "Comment couldn't be deleted. Try again."
-        redirect_to [@post.topic, @post] || [@topic.topics, @topic]
+        redirect_path = @post ? topic_post_path(@post.topic, @post) : topic_path(@topic)
+        redirect_to redirect_path      
       end
     end
     
