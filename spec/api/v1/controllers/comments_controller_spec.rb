@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Api::V1::CommentsController, type: :controller do, 
+RSpec.describe Api::V1::CommentsController, type: :controller do
 
     let(:my_topic) {create(:topic) }
     let(:my_user) {create(:user) }
@@ -14,7 +14,7 @@ RSpec.describe Api::V1::CommentsController, type: :controller do,
         end
         
         it "GET show returns http success" do
-            get :show, post_id: my_post.id, comment.id: my_comment.id
+            get :show, id: my_comment.id
             expect(response).to have_http_status(:success)
         end
     end
@@ -26,7 +26,7 @@ RSpec.describe Api::V1::CommentsController, type: :controller do,
         end
  
         it "GET show returns http success" do
-            get :show, post_id: my_post.id, comment.id: my_comment.id
+            get :show, id: my_comment.id
             expect(response).to have_http_status(:success)
         end
    end
